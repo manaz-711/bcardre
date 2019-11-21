@@ -1,0 +1,132 @@
+ {% load static %}
+<html>
+    <head>
+         {% block title %}
+            welcome
+         {% endblock title%}
+        <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'imupload.css' %}">
+<!--        <script src="{% static 'imupload.js' %}"></script>-->
+        <link rel="stylesheet" type="text/css" href="{% static 'bcard.css' %}">
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<!--        <script src="{% static 'bcard.js' %}"></script>-->
+    </head>
+    <style>
+    .intro{
+        display:none;
+    }
+    .colo{
+        background:yellow;
+        border:5px;
+    }
+</style>
+    <body>
+    {% block content %}
+    <page id="home">
+      <section class="header">
+        <div>
+<!--          <h2><span>W</span><span>ELCOME</span></h2>-->
+<!--          <h5>NLTK</h5>-->
+        </div>
+<!--        <div class='logo'></div>-->
+<!--           <p style="color:white;right:300;top:25;">{{data|linebreaksbr}}</p>-->
+      </section>
+      <section id="grid_wrapper" class="">
+      </section>
+    </page>
+    <div class="wrapper">
+
+    <form method="post" enctype="multipart/form-data" action="{% url 'passdata' %}">
+        {% csrf_token %}
+        <img id="blah" class="intro" src="#" alt="your image" width="300" height="200"/>
+        <input type="file" id="imgInp" style="font-color:black;" name="myfile">
+        <button class="button4" id="button4" type="submit">Upload</button>
+    </form>
+
+    <a href="{% url 'bcarddetails' %}">Display All Bcard</a>
+    </div>
+
+    <div class="upload-result">
+      <button class="hide-button">Close</button>
+      <pre class="upload-result__content">
+      </pre>
+    </div>
+<!--     <img style="left:30%;top:10%;" id="blahaa" src="{{ image}}" alt="your image" width="310" height="200"/>-->
+
+     <!--    information form-->
+    <form class="form" action="{% url 'save' %}" method="POST">
+<!--         <img style="right:500;top:10%;" id="blahaa" src="{{ image}}" alt="your image" width="310" height="200"/>-->
+      <h2>Business Card Details</h2>
+        {% csrf_token %}
+      <p type="Name:"><input type="text" class="input" name="name" value="{% if name %}{{name}}{% endif %}"  ></p>
+
+
+      <p type="Email:"><input type="email"  class="input" name="email" value=" {% if email %}{{email}}{% endif %}" ></p>
+
+
+      <p type="Phone Number:"><label><input type="text" class="input" name="phonenumber" value="{% if phonenumber %}{{phonenumber}} {% endif %}" > </label></p>
+
+
+      <p type="Website:"><label><input type="text"  name="website" class="input" value="{% if website %}{{website}}{% endif %}"></label></p>
+
+
+      <p type="Address:"><label ><input type="text" name="address" class="input" value="{% if address %}{{address}}{% endif %}" ></label></p>
+        <input type="submit" name="submit">
+
+        {% if success %}
+        <p style="color:green;padding-top:10%;">Updated Successfully</p>
+        {% endif %}
+
+
+
+        <div class="btngg" style="right:700;top:200;">
+
+        <p style="color:white;">{{data|linebreaksbr}}</p>
+
+
+        {%if image %}
+
+        <img id="blaha" src="{{image}}" alt="your image" width="310" height="200"/>
+
+        {% endif %}
+
+        </div>
+<!--      <div>-->
+<!--        <span class="fa fa-phone"></span>001 1023 567-->
+<!--        <span class="fa fa-envelope-o"></span> contact@company.com-->
+<!--      </div>-->
+    </form>
+
+
+<!--    {% if imagename %}-->
+<!--      <p>uploaded image name: <a href="{{ uploaded_file_url }}">{{ imagename }}</a></p>-->
+<!--    {% endif %}-->
+    {% endblock%}
+    </body>
+<script>
+<!--   $('#edit').click(function() {-->
+
+<!--    });-->
+function readURL(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function(e) {
+      $('#blah').removeClass("intro");
+      $('#blah').attr('src', e.target.result);
+    }
+
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+$("#imgInp").change(function() {
+
+  readURL(this);
+
+});
+
+</script>
+
+</html>

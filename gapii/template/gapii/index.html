@@ -1,0 +1,18 @@
+<html>
+    <head>
+        <title>Hello</title>
+    </head>
+    <body>
+    {% load static %}
+    <a href="{% url 'passdata' %}" ><img src="{% static 'mt.jpeg' %}" alt="My image" width="500" height="500"></a>
+    <form method="post" enctype="multipart/form-data" action="{% url 'passdata' %}">
+    {% csrf_token %}
+    <input type="file" name="myfile">
+    <button type="submit">Upload</button>
+  </form>
+
+  {% if imagename %}
+    <p>uploaded image name: <a href="{{ uploaded_file_url }}">{{ imagename }}</a></p>
+  {% endif %}
+    </body>
+</html>

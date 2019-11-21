@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<!--    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">-->
+
+</head>
+<body>
+
+<page id="home">
+  <span class="pagetag">#HOME</span>
+  <section class="header">
+    <div>
+      <h2><span>W</span><span>ELCOME</span></h2>
+      <h5>COLDPLAY</h5>
+    </div>
+    <div class='logo'></div>
+  </section>
+  <section id="grid_wrapper" class="">
+
+<!--    <card>-->
+<!--      <div>-->
+<!--        <span>NLTK</span>-->
+<!--      </div>-->
+<!--    </card>-->
+    <card>
+      <div >
+        <form method="post" enctype="multipart/form-data" action="{% url 'passdata' %}">
+        {% csrf_token %}
+        <input class="f" type="file" name="myfile">
+        <button type="submit">Upload</button>
+        </form>
+        {% if imagename %}
+         <p>uploaded image name: <a href="{{ uploaded_file_url }}">{{ imagename }}</a></p>
+        {% endif %}
+      </div>
+
+    </card>
+<!--    <card>-->
+<!--      <div>-->
+<!--        <span>NLTK</span>-->
+<!--      </div>-->
+<!--    </card>-->
+  </section>
+</page>
+
+</body>
+</html>

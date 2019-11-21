@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'bcardtable.css' %}">
+</head>
+<body>
+<div class="aa_htmlTable">
+    <a href="{% url 'index' %}" style="color:#ffff;" class="aa_h5" >Home</a>
+  <h2 class="aa_h5" style="color:#ffff;">BCARD TABLE</h2>
+  <table style="font-size:80%;width:80%;">
+    <thead>
+      <tr>
+        <th>SL.NO</th>
+        <th>NAME</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Address</th>
+        <th>Website</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for data in data %}
+      <tr >
+        <td>{{data.id}}</td>
+        <td>{{data.name}}</td>
+        <td>{{data.email}}</td>
+        <td>{{data.phone}}</td>
+        <td>{{data.address}}</td>
+        <td>{{data.website}}</td>
+      </tr>
+    {% endfor %}
+<!--     -->
+    </tbody>
+<!--    <tfoot>-->
+<!--      <tr>-->
+<!--        <td>Sum</td>-->
+<!--        <td>$180</td>-->
+<!--      </tr>-->
+<!--    </tfoot>-->
+  </table>
+</div>
+
+
+
+</body>
+</html>
